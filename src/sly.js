@@ -667,7 +667,7 @@
 			}
 			if (itemNav) {
 				self[centeredNav ? 'toCenter' : 'toStart'](
-					within((centeredNav ? rel.centerItem : rel.firstItem) + o.scrollBy * delta, 0, items.length)
+					within((centeredNav ? rel.centerItem : rel.firstItem) + delta, 0, items.length)
 				);
 			} else {
 				slideTo(pos.dest + delta, immediate);
@@ -1566,7 +1566,7 @@
 		function normalizeWheelDelta(event) {
 			// wheelDelta needed only for IE8-
 			scrolling.curDelta = ((o.horizontal ? event.deltaY || event.deltaX : event.deltaY) || -event.wheelDelta);
-			scrolling.curDelta /= event.deltaMode === 1 ? 3 : 100;
+			scrolling.curDelta /= event.deltaMode === 1 ? 3 : 50;
 			if (!itemNav) {
 				return scrolling.curDelta;
 			}
