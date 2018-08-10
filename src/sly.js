@@ -1415,6 +1415,26 @@
 			}
 		}
 
+
+		/**
+		 * Handler for dragMove events on SLIDEE.
+		 *
+		 * @param  {Event} event
+		 *
+		 * @return {Void}
+		 */
+		function dragMove(event) {
+			var isTouch = event.type === 'touchmove';
+			var source = event.data.source;
+			var isSlidee = source === 'slidee';
+
+			if (isTouch){
+				stopDefault(event);
+			}
+		}
+
+
+
 		/**
 		 * Handler for dragging scrollbar handle or SLIDEE.
 		 *
@@ -1879,6 +1899,9 @@
 
 			// Dragging navigation
 			$dragSource.on(dragInitEvents, { source: 'slidee' }, dragInit);
+
+ 			// Dragmove
+ 			$dragSource.on(dragTouchEvents, { source: 'slidee'}, dragMove);
 
 			// Scrollbar dragging navigation
 			if ($handle) {

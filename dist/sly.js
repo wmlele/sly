@@ -1422,6 +1422,18 @@
 			}
 		}
 
+
+		function dragMove(event) {
+			var isTouch = event.type === 'touchmove';
+			var source = event.data.source;
+			var isSlidee = source === 'slidee';
+
+			if (isTouch){
+				stopDefault(event);
+			}
+		}
+
+
 		/**
 		 * Handler for dragging scrollbar handle or SLIDEE.
 		 *
@@ -1448,6 +1460,7 @@
 					return dragging.released ? dragEnd() : undefined;
 				}
 				else {
+
 					// If dragging path is sufficiently long we can confidently start a drag
 					// if drag is in different direction than scroll, ignore it
 					if (o.horizontal ? abs(dragging.pathX) > abs(dragging.pathY) : abs(dragging.pathX) < abs(dragging.pathY)) {
@@ -1886,6 +1899,9 @@
 
 			// Dragging navigation
 			$dragSource.on(dragInitEvents, { source: 'slidee' }, dragInit);
+
+			// Dragmove
+			$dragSource.on(dragTouchEvents, { source: 'slidee'}, dragMove);
 
 			// Scrollbar dragging navigation
 			if ($handle) {
